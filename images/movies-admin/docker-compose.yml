@@ -8,16 +8,20 @@ services:
     command: >
       sh -c "cd /app/src/
       && python manage.py migrate --noinput
+      && python manage.py createsuperuser --noinput
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
+    expose:
+      - 8000
     ports:
       - "8000:8000"
-    env_file:
-      - '.env'
     environment:
+      - "DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}"
+      - "DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}"
+      - "DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}"
       - "MOVIES_ADMIN_SECRET_KEY=${MOVIES_ADMIN_SECRET_KEY}"
-      - "MOVIES_ADMIN_DEBUG=${MOVIES_ADMIN_DEBUG}"
+      - "MOVIES_ADMIN_DEBUG=True"
       - "MOVIES_ADMIN_ALLOWED_HOSTS=${MOVIES_ADMIN_ALLOWED_HOSTS}"
       - "MOVIES_DB_NAME=${MOVIES_DB_NAME}"
       - "MOVIES_DB_USER=${MOVIES_DB_USER}"
