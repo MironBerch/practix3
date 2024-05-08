@@ -1,12 +1,10 @@
+from contextlib import contextmanager
 from os import environ
 from typing import Iterator
 
 import psycopg2
-from psycopg2.extras import DictCursor
-
-from contextlib import contextmanager
-
 from psycopg2.extensions import connection
+from psycopg2.extras import DictCursor
 
 
 @contextmanager
