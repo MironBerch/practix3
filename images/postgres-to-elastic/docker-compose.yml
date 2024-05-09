@@ -10,8 +10,15 @@ services:
       && python main.py"
     volumes:
       - .:/app
+    environment:
+      - "MOVIES_DB_NAME=${MOVIES_DB_NAME}"
+      - "MOVIES_DB_USER=${MOVIES_DB_USER}"
+      - "MOVIES_DB_PASSWORD=${MOVIES_DB_PASSWORD}"
+      - "MOVIES_DB_HOST=movies_db"
+      - "MOVIES_DB_PORT=5432"
     depends_on:
       - movies_db
+      - elastic
 
   movies_db:
     build:
