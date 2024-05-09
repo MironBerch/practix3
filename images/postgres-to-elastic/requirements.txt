@@ -1,3 +1,5 @@
+annotated-types==0.6.0
+    # via pydantic
 async-timeout==4.0.3
     # via redis
 certifi==2024.2.2
@@ -20,9 +22,17 @@ psycopg2-binary==2.9.9
     # via -r requirements.in
 pycodestyle==2.11.1
     # via flake8
+pydantic==2.7.1
+    # via -r requirements.in
+pydantic-core==2.18.2
+    # via pydantic
 pyflakes==3.2.0
     # via flake8
 redis==5.0.4
     # via -r requirements.in
+typing-extensions==4.11.0
+    # via
+    #   pydantic
+    #   pydantic-core
 urllib3==2.2.1
     # via elastic-transport
