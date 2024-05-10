@@ -46,7 +46,7 @@ class ElasticsearchLoader(object):
     INDICES = {
         'movies': {
             'id': {'type': 'keyword'},
-            'imdb_rating': {'type': 'float'},
+            'rating': {'type': 'float'},
             'genre': {'type': 'keyword'},
             'title': {
                 'type': 'text',

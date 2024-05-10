@@ -1,5 +1,7 @@
 from time import sleep
 from typing import Any, Callable
+from functools import wraps
+
 
 from core.logger import logger
 
@@ -13,6 +15,7 @@ def backoff(exceptions: tuple[Exception], sleep_time: float = 1.0) -> Callable:
         sleep_time: время повтора
     """
     def decorator(func) -> Callable:
+        @wraps(func)
         def wrapper(*args, **kwargs) -> Any:
             while True:
                 try:

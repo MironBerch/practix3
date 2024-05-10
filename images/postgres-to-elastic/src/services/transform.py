@@ -59,7 +59,7 @@ class DataTransform(object):
             movie['id'] = row['id']
             movie['title'] = row['title']
             movie['description'] = row['description']
-            movie['imdb_rating'] = row['rating']
+            movie['rating'] = row['rating']
         movie.update(self.add_person(row, movie) if row['person_id'] else {})
         movie.update(self.add_genre(row, movie) if row['genre_name'] else {})
 

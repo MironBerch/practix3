@@ -7,7 +7,7 @@ from models.person import Person
 class Movie(UUIDMixin):
     """Класс для валидации данных `filmwork`."""
 
-    imdb_rating: float
+    rating: float
     genre: list[str]
     title: str
     description: str
