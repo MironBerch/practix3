@@ -30,6 +30,15 @@ if TYPE_CHECKING:
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)
 
 
+def create_schema_if_not_exists(dsn: dict[str, str | int]) -> None:
+    connection: postgres_connection_object = psycopg2.connect(**dsn)
+    cursor = connection.cursor()
+    cursor.execute('CREATE SCHEMA IF NOT EXISTS content;')
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+
 class SQLiteDataExtraction:
     def __init__(self, sqlite_connection: sqlite3.Connection):
         self.sqlite_connection = sqlite_connection
@@ -88,7 +97,7 @@ class SQLiteDataExtraction:
 
 
 class PostgresDataLoader:
-    def __init__(self, postgres_connection: sqlite3.Connection):
+    def __init__(self, postgres_connection: postgres_connection_object):
         self.postgres_connection = postgres_connection
 
     @staticmethod
@@ -160,6 +169,7 @@ if __name__ == '__main__':
         'host': environ.get('MOVIES_DB_HOST'),
         'port': int(environ.get('MOVIES_DB_PORT')),
     }
+    create_schema_if_not_exists(dsn=dsn)
     with sqlite3.connect('db.sqlite') as sqlite_connection, \
             psycopg2.connect(**dsn, cursor_factory=DictCursor) as postgres_connection:
         load_from_sqlite(

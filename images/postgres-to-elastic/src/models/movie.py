@@ -7,16 +7,22 @@ from models.person import Person
 class Movie(UUIDMixin):
     """Класс для валидации данных `filmwork`."""
 
-    rating: float
+    rating: float = 0.0
     genre: list[str]
     title: str
     description: str
-    director: list[str]
-    actors_names: list[str]
-    writers_names: list[str]
-    actors: list[Person]
-    writers: list[Person]
+    actors_names: list[str] = []
+    writers_names: list[str] = []
+    directors_names: list[str] = []
+    actors: list[Person] = []
+    writers: list[Person] = []
+    directors: list[Person] = []
     _index: ClassVar[str] = 'movies'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.rating is None:
+            self.rating = 0.0
 
     @classmethod
     def properties(cls, **kwargs) -> dict[str, Any]:

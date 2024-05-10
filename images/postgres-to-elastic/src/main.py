@@ -67,11 +67,6 @@ def postgres_to_elastic(
 
 
 if __name__ == '__main__':
-    logger.info(
-        'ETL запущен. Через 15 секунд начнётся подключение '
-        'к Elasticsearch, PostgreSQL и Redis',
-    )
-    sleep(15.0)
     with get_postgres() as postgres_connection:
         with get_elastic() as elastic_connection:
             with get_redis() as redis_connection:

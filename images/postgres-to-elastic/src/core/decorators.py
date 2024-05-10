@@ -1,7 +1,6 @@
+from functools import wraps
 from time import sleep
 from typing import Any, Callable
-from functools import wraps
-
 
 from core.logger import logger
 

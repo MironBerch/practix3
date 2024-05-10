@@ -54,7 +54,7 @@ class ElasticsearchLoader(object):
                 'fields': {'raw': {'type': 'keyword'}},
             },
             'description': {'type': 'text', 'analyzer': 'ru_en'},
-            'director': {'type': 'text', 'analyzer': 'ru_en'},
+            'directors_names': {'type': 'text', 'analyzer': 'ru_en'},
             'actors_names': {'type': 'text', 'analyzer': 'ru_en'},
             'writers_names': {'type': 'text', 'analyzer': 'ru_en'},
             'actors': {
@@ -66,6 +66,14 @@ class ElasticsearchLoader(object):
                 },
             },
             'writers': {
+                'type': 'nested',
+                'dynamic': 'strict',
+                'properties': {
+                    'id': {'type': 'keyword'},
+                    'name': {'type': 'text', 'analyzer': 'ru_en'},
+                },
+            },
+            'directors': {
                 'type': 'nested',
                 'dynamic': 'strict',
                 'properties': {
