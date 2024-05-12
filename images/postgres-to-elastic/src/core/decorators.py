@@ -6,13 +6,7 @@ from core.logger import logger
 
 
 def backoff(exceptions: tuple[Exception], sleep_time: float = 1.0) -> Callable:
-    """
-    Функция для повторного выполнения функции через некоторое время, если возникла ошибка.
-
-    Args:
-        exceptions: ошибки, которые нужно обработать
-        sleep_time: время повтора
-    """
+    """Функция для повторного выполнения функции через некоторое время, если возникла ошибка."""
     def decorator(func) -> Callable:
         @wraps(func)
         def wrapper(*args, **kwargs) -> Any:

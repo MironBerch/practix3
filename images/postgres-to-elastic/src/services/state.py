@@ -36,9 +36,6 @@ class RedisStorage(BaseStorage):
         - получает состояние с данными в виде словаря;
         - конвертирует словарь в строку;
         - записывает строку в хранилище Redis под ключ `data`.
-
-        Args:
-            state: Новое состояние в виде словаря.
         """
         self.redis_adapter.set('data', json.dumps(state, default=str))
 
@@ -48,9 +45,6 @@ class RedisStorage(BaseStorage):
         - загружает состояние c данными из хранилище Redis под ключом `data` в виде строки;
         - конвертирует строку в словарь;
         - если нет данных возвращает пустой словарь.
-
-        Returns:
-            dict: Текущее состояние в виде словаря.
         """
         return json.loads(self.data) if self.data else {}
 

@@ -116,7 +116,7 @@ class ElasticsearchLoader(object):
                 self.elastic.indices.create(index=index, body=body)
 
     @backoff(exceptions=(ConnectionError, ))
-    def bulk_insert(self, schema: Schemas, data: list[PostgresRow] | ValuesView[dict]):
+    def bulk_insert(self, schema: Schemas, data: list[PostgresRow] | ValuesView[dict]) -> None:
         """Валидирует и загружает данные."""
         actions = (
             {
