@@ -1,9 +1,8 @@
-from models.genre import BaseGenre
-from models.person import BasePerson
-
 from typing import ClassVar, Type
 
 from models.base import OrjsonMixin, UUIDMixin
+from models.genre import BaseGenre
+from models.person import BasePerson
 
 
 class BaseFilm(UUIDMixin, OrjsonMixin):
@@ -28,5 +27,5 @@ class Film(BaseFilm):
 class FilmList(OrjsonMixin):
     """Модель списка фильмов с краткой информацией."""
 
-    __root__: list[BaseFilm]
+    movies: list[BaseFilm]
     item: ClassVar[Type] = BaseFilm

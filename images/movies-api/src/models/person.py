@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import ClassVar
 from uuid import UUID
+
 from models.base import OrjsonMixin, UUIDMixin
 
 
@@ -18,7 +19,7 @@ class BasePerson(UUIDMixin, OrjsonMixin):
     full_name: str
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 class Person(BasePerson):
@@ -31,5 +32,5 @@ class Person(BasePerson):
 class PersonList(OrjsonMixin):
     """Модель списка персон с информацией об их ролях и фильмах."""
 
-    __root__: list[Person]
+    persons: list[Person]
     item: ClassVar[type] = Person

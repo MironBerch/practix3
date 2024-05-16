@@ -6,8 +6,8 @@ from pydantic import BaseModel
 
 class OrjsonMixin(BaseModel):
     class Config:
-        json_loads = orjson.loads
-        json_dumps = orjson.dumps
+        json_load = orjson.loads
+        json_dump = orjson.dumps
 
 
 class UUIDMixin(BaseModel):

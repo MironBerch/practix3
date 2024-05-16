@@ -1,4 +1,6 @@
-from models.base import UUIDMixin
+from typing import ClassVar
+
+from models.base import OrjsonMixin, UUIDMixin
 
 
 class BaseGenre(UUIDMixin):
@@ -7,10 +9,17 @@ class BaseGenre(UUIDMixin):
     name: str
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 class Genre(BaseGenre):
     """Модель жанра."""
 
     description: str
+
+
+class GenreList(OrjsonMixin):
+    """Модель списка жанров."""
+
+    genres: list[Genre]
+    item: ClassVar[type] = Genre
