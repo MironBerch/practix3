@@ -1,5 +1,7 @@
 from typing import Any, ClassVar
 
+from pydantic import Field
+
 from models.base import UUIDMixin
 from models.person import Person
 
@@ -7,7 +9,7 @@ from models.person import Person
 class Movie(UUIDMixin):
     """Класс для валидации данных `filmwork`."""
 
-    rating: float = 0.0
+    rating: float = Field(default=0.0, ge=0.0)
     genre: list[str]
     title: str
     description: str
@@ -20,9 +22,9 @@ class Movie(UUIDMixin):
     _index: ClassVar[str] = 'movies'
 
     def __init__(self, *args, **kwargs):
+        if 'rating' in kwargs and kwargs['rating'] is None:
+            kwargs['rating'] = 0.0
         super().__init__(*args, **kwargs)
-        if self.rating is None:
-            self.rating = 0.0
 
     @classmethod
     def properties(cls, **kwargs) -> dict[str, Any]:
