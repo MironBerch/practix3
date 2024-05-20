@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     REDIS_DB: int = int(environ.get('REDIS_DB'))
 
     ELASTIC_HOST: str = environ.get('ELASTIC_HOST')
-    ELASTIC_PORT: int = int(environ.get('ELASTIC_PORT'))
+    ELASTIC_PORT: str = environ.get('ELASTIC_PORT')
 
 
 settings = Settings()
